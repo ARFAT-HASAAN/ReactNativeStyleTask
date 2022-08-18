@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import { SafeAreaView, StyleSheet } from 'react-native'
+import { useFonts } from 'expo-font'
+import Text from './src/components/Text'
+import Covid from './src/screen/Covid'
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    JosefinSansRegular: require('./src/fonts/JosefinSans-Regular.ttf'),
+    JosefinSansBold: require('./src/fonts/JosefinSans-Bold.ttf'),
+    JosefinSansThin: require('./src/fonts/JosefinSans-Thin.ttf'),
+  })
+
+  if (!fontsLoaded) {
+    return null
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <SafeAreaView style={styles.container}>
+      <Covid />
+    </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-});
+})
